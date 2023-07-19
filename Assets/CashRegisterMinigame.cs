@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CashRegisterMinigame : MonoBehaviour
 {
     public List<Button> cashButtons;
     public GameObject winScreen;
+    public List<string> CashRegisterSymbols = new List<string>{"1", "2", "3", "DEL", "4", "5", "6", "SUM", "7", "8", "9", "ENTER", "0", "00", ".", "CASH"};
     
     private List<List<int>> activateList = new List<List<int>>();
     private List<List<int>> deactivateList = new List<List<int>>();
@@ -26,7 +28,7 @@ public class CashRegisterMinigame : MonoBehaviour
             activateList.Add(new List<int>());
         }
         SetInactive(buttonChain[0], Random.Range(4,8));
-        
+        // SetDeactive(buttonChain);
         CreateChain(buttonChain);
     }
     
@@ -42,7 +44,11 @@ public class CashRegisterMinigame : MonoBehaviour
         }
     }
     
-    void CreateChain(List<int> buttonChain){
+    public void Reset(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    private void CreateChain(List<int> buttonChain){
         List<int> completeChain = new List<int>(ButNum);
         Debug.Log("Button Chain: "+buttonChain);
         foreach(int b in buttonChain){
@@ -55,6 +61,8 @@ public class CashRegisterMinigame : MonoBehaviour
             }
             activateList[buttonChain[i]].Add(buttonChain[i+1]);
         }
+        activateList[buttonChain[buttonChain.Count-1]].Add(buttonChain[buttonChain.Count-1]);
+        cashButtons[buttonChain.Count-1].interactable = true;
         foreach(int b in completeChain){
             int addB = Random.Range(0, buttonChain.Count);
             activateList[buttonChain[addB]].Add(b);
@@ -62,9 +70,16 @@ public class CashRegisterMinigame : MonoBehaviour
                 deactivateList[i].Remove(b);
             }
         }
+        for(int i = 1; i<buttonChain.Count-1; i++){
+            int addB = Random.Range(i+1, buttonChain.Count);
+            activateList[buttonChain[addB]].Add(i);
+            for(int j = addB; j<buttonChain.Count; j++){
+                deactivateList[j].Remove(i);
+            }
+        }
     }
     
-    void SetInactive(int exclude, int num){
+    private void SetInactive(int exclude, int num){
         List<int> numList = new List<int>(ButNum);
         numList.Remove(exclude);
         for(int i=0; i<num; i++){
@@ -74,7 +89,18 @@ public class CashRegisterMinigame : MonoBehaviour
         }
     }
     
-    List<int> UniqRandIntList(int low, int high){
+    private void SetDeactive(List<int> buttonChain){
+        List<int> completeChain = new List<int>(ButNum);
+        foreach(int b in buttonChain){
+            completeChain.Remove(b);
+        }
+    }
+    
+    private void MakeCheatSheet(){
+        
+    }
+    
+    private List<int> UniqRandIntList(int low, int high){
         List<int> randList = new List<int>();
         List<int> numList = new List<int>(ButNum);
         int numGen = Random.Range(Mathf.Max(low, 1), high+1);
