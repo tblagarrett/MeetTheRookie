@@ -9,7 +9,7 @@ public class CashRegisterMinigame : MonoBehaviour
 {
     public List<Button> cashButtons;
     public GameObject winScreen;
-    public List<string> CashRegisterSymbols = new List<string>{"1", "2", "3", "DEL", "4", "5", "6", "SUM", "7", "8", "9", "ENTER", "0", "00", ".", "CASH"};
+    public List<string> cashRegisterSymbols = new List<string>{"1", "2", "3", "DEL", "4", "5", "6", "SUM", "7", "8", "9", "ENTER", "0", "00", ".", "CASH"};
     
     private List<List<int>> activateList = new List<List<int>>();
     private List<List<int>> deactivateList = new List<List<int>>();
@@ -30,6 +30,7 @@ public class CashRegisterMinigame : MonoBehaviour
         SetInactive(buttonChain[0], Random.Range(4,8));
         // SetDeactive(buttonChain);
         CreateChain(buttonChain);
+        MakeCheatSheet(buttonChain);
     }
     
     // Update is called once per frame
@@ -67,14 +68,14 @@ public class CashRegisterMinigame : MonoBehaviour
             int addB = Random.Range(0, buttonChain.Count);
             activateList[buttonChain[addB]].Add(b);
             for(int i = addB; i<buttonChain.Count; i++){
-                deactivateList[i].Remove(b);
+                deactivateList[buttonChain[i]].Remove(b);
             }
         }
         for(int i = 1; i<buttonChain.Count-1; i++){
             int addB = Random.Range(i+1, buttonChain.Count);
             activateList[buttonChain[addB]].Add(i);
             for(int j = addB; j<buttonChain.Count; j++){
-                deactivateList[j].Remove(i);
+                deactivateList[buttonChain[j]].Remove(i);
             }
         }
     }
@@ -96,8 +97,13 @@ public class CashRegisterMinigame : MonoBehaviour
         }
     }
     
-    private void MakeCheatSheet(){
-        
+    private void MakeCheatSheet(List<int> buttonChain){
+        string cheatSheet = "";
+        foreach(int b in buttonChain){
+            cheatSheet += cashRegisterSymbols[b];
+            cheatSheet += " ";
+        }
+        Debug.Log("Cheat Sheet: "+cheatSheet);
     }
     
     private List<int> UniqRandIntList(int low, int high){
