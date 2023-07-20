@@ -31,6 +31,15 @@ public class CashRegisterMinigame : MonoBehaviour
         SetDeactive(buttonChain);
         // CreateChain(buttonChain);
         CreateLinkedChain(buttonChain);
+        // Debug deactivateList
+        /* foreach(HashSet<int> l in deactivateList){
+            string listo = "";
+            foreach(int num in l){
+                listo += cashRegisterSymbols[num];
+                listo += " ";
+            }
+            Debug.Log(listo);
+        } */
         MakeCheatSheet(buttonChain);
     }
     
@@ -52,7 +61,6 @@ public class CashRegisterMinigame : MonoBehaviour
     
     private void CreateChain(List<int> buttonChain){
         List<int> completeChain = new List<int>(butNum);
-        Debug.Log("Button Chain: "+buttonChain);
         foreach(int b in buttonChain){
             completeChain.Remove(b);
         }
@@ -86,7 +94,6 @@ public class CashRegisterMinigame : MonoBehaviour
     
     private void CreateLinkedChain(List<int> buttonChain){
         List<int> completeChain = new List<int>(butNum);
-        Debug.Log("Button Chain: "+buttonChain);
         foreach(int b in buttonChain){
             completeChain.Remove(b);
         }
@@ -97,6 +104,9 @@ public class CashRegisterMinigame : MonoBehaviour
             }
             activateList[buttonChain[i]].Add(buttonChain[i+1]);
             activateList[buttonChain[i+1]].Add(buttonChain[i]);
+            for(int j = i; j<buttonChain.Count; j++){
+                deactivateList[buttonChain[j]].Remove(i);
+            }
         }
         activateList[buttonChain[buttonChain.Count-1]].Add(buttonChain[buttonChain.Count-1]);
         cashButtons[buttonChain.Count-1].interactable = true;
