@@ -9,7 +9,7 @@ public class StorageShelfMinigame : MonoBehaviour
     public GameObject box;
     public GameObject winScreen;
     
-    private Vector3 startCoords = new Vector3(-6.6f, 2.628f, 0);
+    private Vector3 startCoords = new Vector3(-6.6f, 3.028f, 0);
     //x displacement: 4.4; y displacement: 2.25
     private Vector3 xDis = new Vector3(4.4f, 0, 0);
     private Vector3 yDis = new Vector3(0, -2.25f, 0);
