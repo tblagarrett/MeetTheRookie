@@ -27,19 +27,29 @@ public class CashRegisterMinigame : MonoBehaviour
         for(int i = 0; i<butNum.Count; i++){
             activateList.Add(new HashSet<int>());
         }
-        SetInactive(buttonChain[0], Random.Range(4,8));
+        SetInactive(buttonChain[0], 6);
         SetDeactive(buttonChain);
         // CreateChain(buttonChain);
         CreateLinkedChain(buttonChain);
-        // Debug deactivateList
-        /* foreach(HashSet<int> l in deactivateList){
-            string listo = "";
-            foreach(int num in l){
-                listo += cashRegisterSymbols[num];
-                listo += " ";
+        // Debug Lists
+        
+        string listo = "Deactivate List:\n";
+        for(int i = 0; i<deactivateList.Count; i++){
+            listo += i+": ";
+            foreach(int j in deactivateList[i]){
+                listo += j+", ";
             }
-            Debug.Log(listo);
-        } */
+            listo += "\n";
+        }
+        Debug.Log(listo);
+        for(int i = 0; i<activateList.Count; i++){
+            listo += i+": ";
+            foreach(int j in activateList[i]){
+                listo += j+", ";
+            }
+            listo += "\n";
+        }
+        Debug.Log(listo);
         MakeCheatSheet(buttonChain);
     }
     

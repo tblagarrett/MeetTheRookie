@@ -25,7 +25,10 @@ public class StorageShelfMinigame : MonoBehaviour
     private List<GameObject> boxes = new List<GameObject>();
     private List<Vector3> checkBoxes = new List<Vector3>();
     private List<GameObject> sBoxes = new List<GameObject>();
+    // private List<string> boxNames = new List<string>{"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16"};
     private List<string> boxNames = new List<string>{"Strawberry Snack", "Chocolate Snack", "Banana Snack", "Vanilla Snack", "Strawberry Soda", "Chocolate Soda", "Banana Soda", "Vanilla Soda", "Strawberry Bar", "Chocolate Bar", "Banana Bar", "Vanilla Bar", "Strawberry Pudding", "Chocolate Pudding", "Banana Pudding", "Vanilla Pudding"};
+    private List<int> swap1 = new List<int>{3, 9, 13, 5, 12, 2};
+    private List<int> swap2 = new List<int>{10, 15, 1, 11, 8, 15};
     
     // Start is called before the first frame update
     void Start()
@@ -46,14 +49,12 @@ public class StorageShelfMinigame : MonoBehaviour
             boxCoords.x = startCoords.x;
             boxCoords += yDis;
         }
-        int swaps = Random.Range(4,7);
+        int swaps = 6; //Random.Range(4,7);
         Debug.Log("Swaps: "+swaps);
         for(int i=0; i<swaps; i++){
-            int sbox1 = Random.Range(0, 16);
-            int sbox2 = Random.Range(0, 16);
-            Swap(boxes[sbox1], boxes[sbox2]);
-            infoText.text += "Swapped "+boxNames[sbox1]+" and "+boxNames[sbox2]+".\n";
-            Debug.Log("Swap "+i+": "+boxNames[sbox1]+", "+boxNames[sbox2]);
+            Swap(boxes[swap1[i]], boxes[swap2[i]]);
+            infoText.text += "Swapped "+boxNames[swap1[i]]+" and "+boxNames[swap2[i]]+".\n";
+            Debug.Log("Swap "+i+": "+boxNames[swap1[i]]+", "+boxNames[swap2[i]]);
         }
     }
 
