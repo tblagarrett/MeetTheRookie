@@ -8,6 +8,7 @@ public class Player_Interaction : MonoBehaviour
     public GameObject interactIcon;
     public GameObject currInteractable;
     public List<GameObject> allInteractables;
+    public bool showIcon;
 
     public void Start()
     {
@@ -18,6 +19,12 @@ public class Player_Interaction : MonoBehaviour
     public void Update()
     {
         currInteractable = GetNearestInteractable();
+        if(showIcon){
+            Vector3 iconPosition = GetComponentInChildren<SpriteRenderer>().transform.position;
+            iconPosition.y +=GetComponentInChildren<SpriteRenderer>().bounds.size.y/2+1;
+            iconPosition.x +=GetComponentInChildren<SpriteRenderer>().bounds.size.x/2;
+            GetComponent<Player_Interaction>().interactIcon.transform.position = iconPosition;
+        }
     }
 
     #region <<INTERACTIONS>>>

@@ -15,6 +15,8 @@ public class CharacterControl : MonoBehaviour
     //public Inventory inventory;
     public GameObject inventoryParent;
     public GameObject camera;
+    public Animator animator;
+    public float colliderOffset;
     
     public KeyCode inventoryKey = KeyCode.I;
     // Start is called before the first frame update
@@ -28,6 +30,8 @@ public class CharacterControl : MonoBehaviour
         target = transform.position;
         cameraTarget=camera.transform.position;
         inventoryParent.SetActive(false);
+        animator = GetComponentInChildren<Animator>();
+        colliderOffset = GetComponent<BoxCollider2D>().offset.x;
     }
 
     // Update is called once per frame
@@ -65,15 +69,27 @@ public class CharacterControl : MonoBehaviour
         if(arrowKeys){
             if(Input.GetKey(KeyCode.RightArrow)){
                 target.x+=playerSpeed*Time.deltaTime;
-                cameraTarget.x+=playerSpeed*Time.deltaTime;
+                cameraTarget.x=target.x;
                 transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
                 camera.transform.position = Vector3.MoveTowards(camera.transform.position, cameraTarget, playerSpeed*Time.deltaTime);
+                GetComponentInChildren<SpriteRenderer>().flipX =true;
+                Vector2 offset = new Vector2(GetComponent<BoxCollider2D>().offset.x, GetComponent<BoxCollider2D>().offset.y);
+                offset.x= colliderOffset*-1;
+                GetComponent<BoxCollider2D>().offset=offset;
+                animator.Play("walking");
             }
-            if(Input.GetKey(KeyCode.LeftArrow)){
+            else if(Input.GetKey(KeyCode.LeftArrow)){
                 target.x-=playerSpeed*Time.deltaTime;
-                cameraTarget.x-=playerSpeed*Time.deltaTime;
+                cameraTarget.x=target.x;
                 transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
                 camera.transform.position = Vector3.MoveTowards(camera.transform.position, cameraTarget, playerSpeed*Time.deltaTime);
+                GetComponentInChildren<SpriteRenderer>().flipX =false;
+                Vector2 offset = new Vector2(GetComponent<BoxCollider2D>().offset.x, GetComponent<BoxCollider2D>().offset.y);
+                offset.x= colliderOffset;
+                GetComponent<BoxCollider2D>().offset=offset;
+                animator.Play("walking");
+            }else{
+                animator.Play("idle");
             }
         }else{
             if(Input.GetMouseButton(0)){
