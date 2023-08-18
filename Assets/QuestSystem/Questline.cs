@@ -9,7 +9,7 @@ public class QuestLine : MonoBehaviour
     [HideInInspector]
     public ActionManager actionManager;
     public string description, title;
-    public int ID;
+    public int ID, index;
 
     [Header("Quest Steps")]
     public QuestStep currentQuest;
@@ -26,20 +26,27 @@ public class QuestLine : MonoBehaviour
 
     public void UpdateQuestLine()
     {
+        bool satisfied = false;
         // if Fetch Quest check if items are in inventory
         if (currentQuest.questType == QuestType.FETCH)
         {
             // get ref to child version of currentQuest
             FetchQuestStep fetchQuestRef = currentQuest as FetchQuestStep;
 
-            bool satisfied = actionManager.CheckFetchQuest(fetchQuestRef.fetchItems);
+            satisfied = actionManager.CheckFetchQuest(fetchQuestRef.fetchItems);
             Debug.Log(fetchQuestRef.name + " SATISFIED: " + satisfied);
 
-            if (satisfied)
-            {
+            if (satisfied) { 
                 actionManager.ReadQuestComplete(fetchQuestRef.onComplete);
-                currentQuest = quests[1];
+                if(index+1<quests.Count){
+                    index++;
+                    currentQuest = quests[index];
+                }
             }
+        }
+        if(currentQuest.questType == QuestType.TALK_TO)
+        {
+
         }
     }
 }

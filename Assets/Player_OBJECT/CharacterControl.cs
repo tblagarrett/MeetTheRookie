@@ -9,10 +9,12 @@ public class CharacterControl : MonoBehaviour
 
     public float playerSpeed=5f;
     private Vector3 target;
+    private Vector3 cameraTarget;
     public bool arrowKeys = true;
     public bool inventoryOpen = false;
     //public Inventory inventory;
     public GameObject inventoryParent;
+    public GameObject camera;
     
     public KeyCode inventoryKey = KeyCode.I;
     // Start is called before the first frame update
@@ -24,6 +26,7 @@ public class CharacterControl : MonoBehaviour
         interaction = GetComponentInChildren<Player_Interaction>();
 
         target = transform.position;
+        cameraTarget=camera.transform.position;
         inventoryParent.SetActive(false);
     }
 
@@ -62,11 +65,15 @@ public class CharacterControl : MonoBehaviour
         if(arrowKeys){
             if(Input.GetKey(KeyCode.RightArrow)){
                 target.x+=playerSpeed*Time.deltaTime;
+                cameraTarget.x+=playerSpeed*Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
+                camera.transform.position = Vector3.MoveTowards(camera.transform.position, cameraTarget, playerSpeed*Time.deltaTime);
             }
             if(Input.GetKey(KeyCode.LeftArrow)){
                 target.x-=playerSpeed*Time.deltaTime;
+                cameraTarget.x-=playerSpeed*Time.deltaTime;
                 transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
+                camera.transform.position = Vector3.MoveTowards(camera.transform.position, cameraTarget, playerSpeed*Time.deltaTime);
             }
         }else{
             if(Input.GetMouseButton(0)){
