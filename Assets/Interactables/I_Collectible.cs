@@ -4,7 +4,7 @@ using UnityEngine;
 
 [System.Serializable]
 [RequireComponent(typeof(SpriteRenderer))]
-public class I_Collectible : MonoBehaviour, IInteractable
+public class I_Collectible : Interactable
 {
     private ActionManager actionManager;
 
@@ -16,7 +16,7 @@ public class I_Collectible : MonoBehaviour, IInteractable
         actionManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<ActionManager>();
     }
 
-    public void Interact()
+    protected override void Interact()
     {   
         if(locked){
             Debug.Log("can't pick up the collectible! it locked");

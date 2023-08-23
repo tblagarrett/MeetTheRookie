@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class I_Toggleable : MonoBehaviour, IInteractable
+public class I_Toggleable : Interactable
 {
     public bool isLocked = false;
     public string prefix = "((TOGGLEABLE)) ";
@@ -21,7 +21,7 @@ public class I_Toggleable : MonoBehaviour, IInteractable
         sr.sprite = off;
     }
 
-    public void Interact(){
+    protected override void Interact(){
 
         Debug.Log(prefix + " called interact");
 

@@ -32,7 +32,7 @@ public class Player_Interaction : MonoBehaviour
     {
         if (currInteractable != null)
         {
-            currInteractable.GetComponent<IInteractable>().Interact();
+            currInteractable.GetComponent<Interactable>().BaseInteract();
         }
     }
 
