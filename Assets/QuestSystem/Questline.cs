@@ -9,7 +9,7 @@ public class QuestLine : MonoBehaviour
     [HideInInspector]
     public ActionManager actionManager;
     public string description, title;
-    public int ID, index;
+    public int ID, index = 0;
 
     [Header("Quest Steps")]
     public QuestStep currentQuest;
@@ -37,10 +37,15 @@ public class QuestLine : MonoBehaviour
             Debug.Log(fetchQuestRef.name + " SATISFIED: " + satisfied);
 
             if (satisfied) { 
+                
+                questManager.completeQuests.Add(currentQuest);
+                questManager.activeQuests.Remove(currentQuest);
                 actionManager.ReadQuestComplete(fetchQuestRef.onComplete);
                 if(index+1<quests.Count){
                     index++;
-                    currentQuest = quests[index];
+                    currentQuest = quests[index];  
+                    questManager.activeQuests.Add(currentQuest);
+                    
                 }
             }
         }

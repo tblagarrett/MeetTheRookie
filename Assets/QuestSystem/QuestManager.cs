@@ -10,7 +10,8 @@ public class QuestManager : MonoBehaviour
 
     [Header("Quest Lines")]
     public List <QuestLine> activeQuestLines;
-
+    public List <QuestStep> activeQuests;
+    public List <QuestStep> completeQuests;
     public void Awake()
     {
         actionManager = GetComponent<ActionManager>();

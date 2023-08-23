@@ -31,7 +31,7 @@ public class Player_Interaction : MonoBehaviour
     public void InteractWithObject()
     {
         if (currInteractable != null)
-        {
+        {   
             currInteractable.GetComponent<Interactable>().BaseInteract();
         }
     }

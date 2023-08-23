@@ -7,7 +7,6 @@ public class ActionManager : MonoBehaviour
     public SceneManager sceneManager;
     public QuestManager questManager;
     public Inventory inventory;
-
     /*
     reference to:
     - player,
@@ -67,7 +66,8 @@ public class ActionManager : MonoBehaviour
     #region quest complete
     public void ReadQuestComplete(QuestComplete questComplete)
     {
-        Debug.Log(questComplete.type);
+        //Debug.Log(questComplete.type);
+        if(questComplete == null) return;
         if (questComplete.type == QuestCompleteType.SEND_TO)
         {
             Location_QuestComplete locationOnComplete = questComplete as Location_QuestComplete;

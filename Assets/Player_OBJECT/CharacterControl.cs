@@ -14,7 +14,7 @@ public class CharacterControl : MonoBehaviour
     public bool inventoryOpen = false;
     //public Inventory inventory;
     public GameObject inventoryParent;
-    public GameObject camera;
+    public GameObject cam;
     public Animator animator;
     public float colliderOffset;
     
@@ -28,7 +28,7 @@ public class CharacterControl : MonoBehaviour
         interaction = GetComponentInChildren<Player_Interaction>();
 
         target = transform.position;
-        cameraTarget=camera.transform.position;
+        cameraTarget=cam.transform.position;
         inventoryParent.SetActive(false);
         animator = GetComponentInChildren<Animator>();
         colliderOffset = GetComponent<BoxCollider2D>().offset.x;
@@ -54,7 +54,7 @@ public class CharacterControl : MonoBehaviour
         }
 
         if(!inventoryOpen){
-            HandleMovement();
+            //HandleMovement();
             if(Input.GetKeyDown(KeyCode.E)){
                 interaction.InteractWithObject();
             }
@@ -64,38 +64,31 @@ public class CharacterControl : MonoBehaviour
 
     #endregion
     #region <<MOVEMENT>>
-    public void HandleMovement(){
-        
-        if(arrowKeys){
-            if(Input.GetKey(KeyCode.RightArrow)){
-                target.x+=playerSpeed*Time.deltaTime;
-                cameraTarget.x=target.x;
-                transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
-                camera.transform.position = Vector3.MoveTowards(camera.transform.position, cameraTarget, playerSpeed*Time.deltaTime);
-                GetComponentInChildren<SpriteRenderer>().flipX =true;
-                Vector2 offset = new Vector2(GetComponent<BoxCollider2D>().offset.x, GetComponent<BoxCollider2D>().offset.y);
-                offset.x= colliderOffset*-1;
-                GetComponent<BoxCollider2D>().offset=offset;
-                animator.Play("walking");
-            }
-            else if(Input.GetKey(KeyCode.LeftArrow)){
-                target.x-=playerSpeed*Time.deltaTime;
-                cameraTarget.x=target.x;
-                transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
-                camera.transform.position = Vector3.MoveTowards(camera.transform.position, cameraTarget, playerSpeed*Time.deltaTime);
-                GetComponentInChildren<SpriteRenderer>().flipX =false;
-                Vector2 offset = new Vector2(GetComponent<BoxCollider2D>().offset.x, GetComponent<BoxCollider2D>().offset.y);
+    //RIGHT POSIVE LEFT NEGATIVE
+    //SPRITE FACES LEFT BY DEFAULT
+    public void HandleMovement(Vector2 input){
+        Vector3 MoveDirection = Vector2.zero;
+        MoveDirection.x = input.x;
+        target.x+=MoveDirection.x * playerSpeed*Time.deltaTime;
+        transform.position = Vector3.MoveTowards(transform.position, target , playerSpeed*Time.deltaTime);
+        Vector2 offset = new Vector2(GetComponent<BoxCollider2D>().offset.x, GetComponent<BoxCollider2D>().offset.y);
+
+        switch (input.x){
+            case -1: //walk left
+                GetComponentInChildren<SpriteRenderer>().flipX = false;
                 offset.x= colliderOffset;
                 GetComponent<BoxCollider2D>().offset=offset;
                 animator.Play("walking");
-            }else{
+                break;
+            case 1: //walk right
+                GetComponentInChildren<SpriteRenderer>().flipX = true;
+                offset.x= colliderOffset*-1;
+                GetComponent<BoxCollider2D>().offset=offset;
+                animator.Play("walking");
+                break;
+            case 0: //no walk
                 animator.Play("idle");
-            }
-        }else{
-            if(Input.GetMouseButton(0)){
-            target.x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-            }
-            transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
+                break;
         }
     }
 

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be36bbfee16868941aac7c184ec8fb87, type: 3}
-  m_Name: AppleQuest
+  m_Name: GetHotdog
   m_EditorClassIdentifier: 
   questLine: {fileID: 0}
   questType: 1
-  description: 
+  description: get hotdog
   title: Fetch Quest
   ID: 1001
   locked: 1
