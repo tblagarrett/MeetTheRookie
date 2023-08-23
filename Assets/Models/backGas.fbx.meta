@@ -1,14 +1,29 @@
 fileFormatVersion: 2
-guid: e0c04ebf7fc93534ca950929e6dc3307
+guid: 9bcdea0474e543148a2b28616aaf7bae
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: a305392f7b4013440bee1add190cea22, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dumpster
+    second: {fileID: 2100000, guid: 274eadfa4a81b4f45b8aac42c8ed2539, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dumpster.001
+    second: {fileID: 2100000, guid: 5ab6e6b5b5fcc004ca83a9ffc8fce430, type: 2}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: dumpster
-    second: {fileID: 2800000, guid: 8b5d68d71b6e4ff4da26f4d20c8f227a, type: 3}
+    second: {fileID: 2800000, guid: c9b2e439004e0b747815156397534ba8, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
