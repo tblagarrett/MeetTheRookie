@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class CharacterControl : MonoBehaviour
 {
-    public GameObject interactIcon;
+    [HideInInspector]
+    public Player_Interaction interaction;
+
     public float playerSpeed=5f;
     private Vector3 target;
-    public Vector2 interactableBoxRange= new Vector2(.1f,1f);
+    private Vector3 cameraTarget;
     public bool arrowKeys = true;
     public bool inventoryOpen = false;
     //public Inventory inventory;
     public GameObject inventoryParent;
+    public GameObject camera;
+    public Animator animator;
+    public float colliderOffset;
     
     public KeyCode inventoryKey = KeyCode.I;
     // Start is called before the first frame update
@@ -20,9 +25,13 @@ public class CharacterControl : MonoBehaviour
     public bool ignoringInputs;
     void Start()
     {
+        interaction = GetComponentInChildren<Player_Interaction>();
+
         target = transform.position;
-        interactIcon.SetActive(false);
+        cameraTarget=camera.transform.position;
         inventoryParent.SetActive(false);
+        animator = GetComponentInChildren<Animator>();
+        colliderOffset = GetComponent<BoxCollider2D>().offset.x;
     }
 
     // Update is called once per frame
@@ -33,36 +42,7 @@ public class CharacterControl : MonoBehaviour
         }
     }
     
-    #region <<INTERACTIONS>>>
-    public void OpenInteractableIcon(){
-        interactIcon.SetActive(true);
-    }
-    public void CloseInteractableIcon(){
-        interactIcon.SetActive(false);
-    }
 
-    private void CheckInteraction(){
-        //box casting, will put a box around our object
-        RaycastHit2D[]hits = Physics2D.BoxCastAll(transform.position, interactableBoxRange, 0 , Vector2.zero);
-
-        // >> get all objects in area
-        if (hits.Length > 0)
-        {
-            Debug.Log("Character Control.cs :: checkInteraction hits " + hits.Length);
-            foreach (RaycastHit2D rc in hits){
-                if (rc.transform.TryGetComponent(out IInteractable interactableObj))
-                {
-                    // << GET ALL IInteractable interface functions in child scripts and Interact() >>
-                    IInteractable[] interactables = interactableObj.gameObject.GetComponents<IInteractable>();
-                    foreach (IInteractable interaction in interactables)
-                    {
-                        interaction.Interact();
-                    }
-                }
-            }
-        }
-    }
-    #endregion
     #region <<INPUT>>
     public void InputHandler(){
         if (Input.GetKeyDown(inventoryKey))
@@ -72,14 +52,16 @@ public class CharacterControl : MonoBehaviour
             Debug.Log("SETTING INVENTORY PARENT TO: " + inventoryOpen);
             //set inventory active
         }
+
         if(!inventoryOpen){
             HandleMovement();
             if(Input.GetKeyDown(KeyCode.E)){
-                CheckInteraction();
+                interaction.InteractWithObject();
             }
         }
-
     }
+
+
     #endregion
     #region <<MOVEMENT>>
     public void HandleMovement(){
@@ -87,11 +69,27 @@ public class CharacterControl : MonoBehaviour
         if(arrowKeys){
             if(Input.GetKey(KeyCode.RightArrow)){
                 target.x+=playerSpeed*Time.deltaTime;
+                cameraTarget.x=target.x;
                 transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
+                camera.transform.position = Vector3.MoveTowards(camera.transform.position, cameraTarget, playerSpeed*Time.deltaTime);
+                GetComponentInChildren<SpriteRenderer>().flipX =true;
+                Vector2 offset = new Vector2(GetComponent<BoxCollider2D>().offset.x, GetComponent<BoxCollider2D>().offset.y);
+                offset.x= colliderOffset*-1;
+                GetComponent<BoxCollider2D>().offset=offset;
+                animator.Play("walking");
             }
-            if(Input.GetKey(KeyCode.LeftArrow)){
+            else if(Input.GetKey(KeyCode.LeftArrow)){
                 target.x-=playerSpeed*Time.deltaTime;
+                cameraTarget.x=target.x;
                 transform.position = Vector3.MoveTowards(transform.position, target, playerSpeed*Time.deltaTime);
+                camera.transform.position = Vector3.MoveTowards(camera.transform.position, cameraTarget, playerSpeed*Time.deltaTime);
+                GetComponentInChildren<SpriteRenderer>().flipX =false;
+                Vector2 offset = new Vector2(GetComponent<BoxCollider2D>().offset.x, GetComponent<BoxCollider2D>().offset.y);
+                offset.x= colliderOffset;
+                GetComponent<BoxCollider2D>().offset=offset;
+                animator.Play("walking");
+            }else{
+                animator.Play("idle");
             }
         }else{
             if(Input.GetMouseButton(0)){
@@ -116,4 +114,5 @@ public class CharacterControl : MonoBehaviour
         ignoringInputs = false;
     }
     #endregion
+
 }

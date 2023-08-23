@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class Ladder : MonoBehaviour, IInteractable
+public class Ladder : Interactable
 {
     private SpriteRenderer sr;
     GameObject player;
@@ -13,7 +13,7 @@ public class Ladder : MonoBehaviour, IInteractable
         sr = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
-    public void Interact(){
+    protected override void Interact(){
         Vector3 pos = player.transform.position;
         pos.x = transform.position.x;
         player.transform.position = pos;

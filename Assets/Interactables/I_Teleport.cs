@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class I_Teleport : MonoBehaviour, IInteractable
+public class I_Teleport : Interactable
 {   
     public bool isLocked = false;
     public GameObject destination;
@@ -11,7 +11,7 @@ public class I_Teleport : MonoBehaviour, IInteractable
     void Start(){
         player = GameObject.FindGameObjectWithTag("Player");
     }
-    public void Interact(){
+    protected override void Interact(){
         if(isLocked){ 
             Debug.Log("can't teleport it locked");
             return;
