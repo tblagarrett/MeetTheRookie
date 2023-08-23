@@ -8,27 +8,27 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Front_Vend
-    second: {fileID: 2800000, guid: 892ee875b910fdd49ba18a7d1ecd3f9e, type: 3}
+    second: {fileID: 2800000, guid: ab37d2e4c35964b4b9f1a63daeebc35b, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Side_Vend
-    second: {fileID: 2800000, guid: 7eec672a447b82a48a5658095f90c6c5, type: 3}
+    second: {fileID: 2800000, guid: 3f08887ab11a2184f8c994ca36b796fb, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: gas station storage ceiling
-    second: {fileID: 2800000, guid: ec2c17d681215824c812c237af2bcf7d, type: 3}
+    second: {fileID: 2800000, guid: da7df9cd21abbe04191bdbc6f5d70a50, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: gas store interior wall cracks
-    second: {fileID: 2800000, guid: 2866e965eaa7c564bbfaf0d711a8446a, type: 3}
+    second: {fileID: 2800000, guid: e222eaa938fda7d4db56180cc0454e44, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: hot dog textures
-    second: {fileID: 2800000, guid: cc3a69af53feff046bb8cd62d5a9beb8, type: 3}
+    second: {fileID: 2800000, guid: 392b06e283dd57b45bd0dbd944b121c3, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

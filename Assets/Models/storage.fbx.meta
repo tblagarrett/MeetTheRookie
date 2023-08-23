@@ -8,27 +8,27 @@ ModelImporter:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: boxes
-    second: {fileID: 2800000, guid: 1c59b6924aadd764da0b7e8e7b34938b, type: 3}
+    second: {fileID: 2800000, guid: 182699e51d6deea46b841ce586ada0be, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: gas station storage ceiling
-    second: {fileID: 2800000, guid: b7a55f9eb15a5c844af21064effaa6c0, type: 3}
+    second: {fileID: 2800000, guid: 2fdc756ca2baeaa42b66564fc9e940c8, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: gas station storage floor
-    second: {fileID: 2800000, guid: e9032549ecfe052448af7c9fd93f66cf, type: 3}
+    second: {fileID: 2800000, guid: 52f112a8a46402d4b9b97c4a88efea35, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: gas station storage wall
-    second: {fileID: 2800000, guid: f54f9ff39c3efd747a50da4c1293daf2, type: 3}
+    second: {fileID: 2800000, guid: 543a1bcffa5f39747a1bdc3b7674a451, type: 3}
   - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: metal racks
-    second: {fileID: 2800000, guid: 21119cee2ffa2f14e812b07313d7eb23, type: 3}
+    second: {fileID: 2800000, guid: 09a87313eff28664ea319549b3b2ec8e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
