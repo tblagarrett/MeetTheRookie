@@ -10,7 +10,7 @@ interface IInteractable
 }
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class Interactor : MonoBehaviour
+public abstract class Interactor : MonoBehaviour
 {
     public Sprite icon;
     private void Awake(){
