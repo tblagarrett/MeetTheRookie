@@ -1,4 +1,5 @@
 using UnityEditor;
+using UnityEngine;
 [CustomEditor(typeof(Interactable),true)]
 public class InteractableEditor : Editor
 {
