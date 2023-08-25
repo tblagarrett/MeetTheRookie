@@ -609,6 +609,28 @@
                 },
                 {
                     "name": "",
+                    "id": "8a3c693c-bded-4650-8c39-e03a57c7ab06",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9fb39bcf-e18b-4585-89f1-1b4ebce7d62d",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5c8ce6a0-5204-4a42-8a36-86cfd74057de",
                     "path": "*/{Cancel}",
                     "interactions": "",

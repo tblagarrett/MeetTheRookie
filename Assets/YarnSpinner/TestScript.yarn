@@ -24,7 +24,7 @@ title: GS_Employee2
     GS_Employee: you don't know my name.
 <<endif>>
 
-<<thought Dialogue Bubble>>
+<<thought Text>>
 Player: shit why is that important...
 ===
 

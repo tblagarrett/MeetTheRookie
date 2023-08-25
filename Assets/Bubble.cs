@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using Yarn.Unity;
 public class Bubble : MonoBehaviour
 {
     public Image bubble;
-
+    public Sprite thought;
+    public Sprite outLoud;
     // Start is called before the first frame update
     void Start()
     {
-        bubble = GetComponent<Image>();    
+        bubble = GetComponentInParent<Image>();    
     }
 
     [YarnCommand("thought")]

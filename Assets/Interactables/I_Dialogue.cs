@@ -9,6 +9,8 @@ public class I_Dialogue : Interactable
     private int index = 0;
     private bool isCurrentConversation;
     private DialogueRunner dialogueRunner;
+
+    public bool repeatLastDialogue;
     void Start(){
         dialogueRunner = FindObjectOfType<Yarn.Unity.DialogueRunner>();
     }
@@ -20,6 +22,8 @@ public class I_Dialogue : Interactable
         if(index<nodes.Count){
             dialogueRunner.StartDialogue(nodes[index]);
             index++;
+        }else if(repeatLastDialogue){
+            dialogueRunner.StartDialogue(nodes[index]);
         }
     }
     /*
