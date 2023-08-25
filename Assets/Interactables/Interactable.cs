@@ -14,9 +14,9 @@ public abstract class Interactable : MonoBehaviour
     
     private QuestManager questManager;
     public void BaseInteract(){
-        if(unlockedIfQuest != null && questManager.completeQuests.IndexOf(unlockedIfQuest)==-1) return; 
+        //if(unlockedIfQuest != null && questManager.completeQuests.IndexOf(unlockedIfQuest)==-1) return; 
         // if the unlocked quest isn't null & isn't a completed quest then do not do the interaction
-        
+        Debug.Log("interacting w/: "+gameObject);
         if(useEvents){
             GetComponent<InteractionEvent>().OnInteract.Invoke();
         }

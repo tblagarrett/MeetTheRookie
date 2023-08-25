@@ -13,7 +13,7 @@ public class CharacterControl : MonoBehaviour
     public bool arrowKeys = true;
     public bool inventoryOpen = false;
     //public Inventory inventory;
-    public GameObject inventoryParent;
+    //public GameObject inventoryParent;
     public GameObject cam;
     public Animator animator;
     public float colliderOffset;
@@ -29,7 +29,7 @@ public class CharacterControl : MonoBehaviour
 
         target = transform.position;
         cameraTarget=cam.transform.position;
-        inventoryParent.SetActive(false);
+        //inventoryParent.SetActive(false);
         animator = GetComponentInChildren<Animator>();
         colliderOffset = GetComponent<BoxCollider2D>().offset.x;
     }
@@ -37,32 +37,9 @@ public class CharacterControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!ignoringInputs){
-            InputHandler();
-        }
     }
     
 
-    #region <<INPUT>>
-    public void InputHandler(){
-        if (Input.GetKeyDown(inventoryKey))
-        {
-            inventoryOpen = !inventoryOpen;
-            inventoryParent.SetActive(inventoryOpen);
-            Debug.Log("SETTING INVENTORY PARENT TO: " + inventoryOpen);
-            //set inventory active
-        }
-
-        if(!inventoryOpen){
-            //HandleMovement();
-            if(Input.GetKeyDown(KeyCode.E)){
-                interaction.InteractWithObject();
-            }
-        }
-    }
-
-
-    #endregion
     #region <<MOVEMENT>>
     //RIGHT POSIVE LEFT NEGATIVE
     //SPRITE FACES LEFT BY DEFAULT

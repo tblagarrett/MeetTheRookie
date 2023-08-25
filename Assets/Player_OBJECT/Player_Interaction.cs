@@ -20,19 +20,27 @@ public class Player_Interaction : MonoBehaviour
     {
         currInteractable = GetNearestInteractable();
         if(showIcon){
+            GetComponent<Player_Interaction>().interactIcon.transform.position = IconMath();
+        }
+    }
+
+    public Vector3 IconMath(){
             Vector3 iconPosition = GetComponentInChildren<SpriteRenderer>().transform.position;
             iconPosition.y +=GetComponentInChildren<SpriteRenderer>().bounds.size.y/2+1;
             iconPosition.x +=GetComponentInChildren<SpriteRenderer>().bounds.size.x/2;
-            GetComponent<Player_Interaction>().interactIcon.transform.position = iconPosition;
-        }
+
+            return iconPosition;
     }
+
 
     #region <<INTERACTIONS>>>
     public void InteractWithObject()
     {
-        if (currInteractable != null)
-        {   
-            currInteractable.GetComponent<Interactable>().BaseInteract();
+        currInteractable.GetComponent<Interactable>().BaseInteract();
+    }
+    public void InteractionCheck(){
+        if(currInteractable!= null && showIcon){
+            InteractWithObject();
         }
     }
 

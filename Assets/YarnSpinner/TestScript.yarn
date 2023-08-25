@@ -1,0 +1,39 @@
+﻿
+title: GS_Employee1
+---
+
+<<declare $knowGS_EmployeeName = false>>
+<<declare $sawHotDog = false>>
+GS_Employee: hello! you're talking to me through yarnspinner.
+-> Player: shit dawg that's crazy
+    GS_Employee: i know right?
+    <<if $sawHotDog>>
+        Player: btw there's a gross ass hotdog on the floor over there
+    <<endif>>
+-> Player: who r u?
+    Player: who r u?
+    <<set $knowGS_EmployeeName = true>>
+    GS_Employee: my name = GS_Employee
+===
+
+title: GS_Employee2
+---
+<<if $knowGS_EmployeeName>>
+    GS_Employee: you know my name.
+<<else>>
+    GS_Employee: you don't know my name.
+<<endif>>
+
+<<thought Dialogue Bubble>>
+Player: shit why is that important...
+===
+
+title: hotdog1
+---
+<< set $sawHotDog = true>>
+Player: ew why is this hotdog on the floor
+===
+title: hotdog2
+---
+Player: again, one nasty ass hotdog.
+===

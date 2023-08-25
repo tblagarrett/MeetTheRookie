@@ -1,0 +1,11 @@
+{
+  "projectFileVersion": 2,
+  "sourceFiles": [
+    "Assets/YarnSpinner/TestScript.yarn",
+    "**/*.yarn"
+  ],
+  "excludeFiles": [],
+  "localisation": {},
+  "baseLanguage": "en",
+  "compilerOptions": {}
+}

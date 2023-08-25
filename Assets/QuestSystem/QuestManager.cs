@@ -19,6 +19,6 @@ public class QuestManager : MonoBehaviour
 
     public void UpdateActiveQuestLines()
     {
-        foreach (QuestLine ql in activeQuestLines) { ql.UpdateQuestLine(); }
+        //foreach (QuestLine ql in activeQuestLines) { ql.UpdateQuestLine(); }
     }
 }

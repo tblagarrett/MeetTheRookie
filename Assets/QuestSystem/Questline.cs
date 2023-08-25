@@ -51,7 +51,7 @@ public class QuestLine : MonoBehaviour
         }
         if(currentQuest.questType == QuestType.TALK_TO)
         {
-
+        
         }
     }
 }
